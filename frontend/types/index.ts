@@ -3,7 +3,7 @@ export interface MailLog {
   id: number
   sent_at: string
   sender: string
-  recipient: string
+  title: string
 }
 
 // API レスポンス

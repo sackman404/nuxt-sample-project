@@ -13,7 +13,7 @@ withDefaults(defineProps<Props>(), {
 const columns = [
   { key: 'sent_at', label: '送信日時', width: '200px' },
   { key: 'sender', label: '送信者' },
-  { key: 'recipient', label: '宛先' }
+  { key: 'title', label: '宛先' }
 ]
 
 const formatDate = (dateString: string): string => {
@@ -30,9 +30,17 @@ const formatDate = (dateString: string): string => {
 </script>
 
 <template>
-  <AppTable :columns="columns" :data="logs" :loading="loading">
-    <template #cell-sent_at="{ value }">
-      {{ formatDate(value as string) }}
-    </template>
-  </AppTable>
+  <div class="data-table">
+    <AppTable :columns="columns" :data="logs" :loading="loading">
+      <template #cell-sent_at="{ value }">
+        {{ formatDate(value as string) }}
+      </template>
+    </AppTable>
+  </div>
 </template>
+
+<style scoped>
+.data-table {
+  height: 100%;
+}
+</style>

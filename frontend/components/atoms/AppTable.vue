@@ -55,12 +55,14 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .app-table-wrapper {
-  overflow-x: auto;
+  overflow: auto;
+  height: 100%;
 }
 
 .app-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
 }
 
@@ -68,13 +70,21 @@ withDefaults(defineProps<Props>(), {
 .app-table td {
   padding: 12px 16px;
   text-align: left;
+}
+
+.app-table td {
   border-bottom: 1px solid #e5e7eb;
 }
 
 .app-table th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background-color: #f9fafb;
   font-weight: 600;
   color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  box-shadow: 0 1px 0 #e5e7eb;
 }
 
 .app-table tbody tr:hover {
