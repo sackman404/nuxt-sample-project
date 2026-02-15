@@ -46,13 +46,6 @@ const errors = computed<ValidationErrors>(() => {
     }
   }
 
-  // 片方の日付のみ入力されている場合の警告
-  if (start_date && !end_date) {
-    result.end_date = '終了日を指定してください'
-  } else if (!start_date && end_date) {
-    result.start_date = '開始日を指定してください'
-  }
-
   // メールアドレス形式チェック
   if (email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -67,10 +60,17 @@ const errors = computed<ValidationErrors>(() => {
 const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 
 const updateField = (field: keyof MailLogSearchParams, value: string) => {
-  emit('update:modelValue', {
-    ...props.modelValue,
-    [field]: value || undefined
-  })
+  const updatedValue = value || undefined
+  const newParams = { ...props.modelValue, [field]: updatedValue }
+
+  // 日付入力時の自動補完
+  if (field === 'start_date' && updatedValue && !props.modelValue.end_date) {
+    newParams.end_date = updatedValue
+  } else if (field === 'end_date' && updatedValue && !props.modelValue.start_date) {
+    newParams.start_date = updatedValue
+  }
+
+  emit('update:modelValue', newParams)
 }
 
 const handleSearch = () => {
