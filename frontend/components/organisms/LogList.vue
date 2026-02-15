@@ -42,24 +42,28 @@ onMounted(() => {
 
 <template>
   <div class="log-list">
-    <LogSearchPanel
-      :search-params="searchParams"
-      :loading="logStore.isLoading"
-      :total-count="logStore.total"
-      @update:search-params="searchParams = $event"
-      @search="fetchLogs"
-      @reset="handleReset"
-      @export="handleExport"
-    />
+    <div class="log-list__fixed">
+      <LogSearchPanel
+        :search-params="searchParams"
+        :loading="logStore.isLoading"
+        :total-count="logStore.total"
+        @update:search-params="searchParams = $event"
+        @search="fetchLogs"
+        @reset="handleReset"
+        @export="handleExport"
+      />
 
-    <div v-if="logStore.error" class="log-list__error">
-      {{ logStore.error }}
+      <div v-if="logStore.error" class="log-list__error">
+        {{ logStore.error }}
+      </div>
     </div>
 
-    <DataTable
-      :logs="logStore.logs"
-      :loading="logStore.isLoading"
-    />
+    <div class="log-list__scrollable">
+      <DataTable
+        :logs="logStore.logs"
+        :loading="logStore.isLoading"
+      />
+    </div>
   </div>
 </template>
 
@@ -68,6 +72,21 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.log-list__fixed {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.log-list__scrollable {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
 }
 
 .log-list__error {

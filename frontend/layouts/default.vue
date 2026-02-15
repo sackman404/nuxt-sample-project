@@ -12,14 +12,18 @@
 
 <style scoped>
 .layout {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .layout__main {
   flex: 1;
   padding: 24px;
   background-color: #f3f4f6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 </style>
