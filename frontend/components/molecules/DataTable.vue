@@ -13,7 +13,7 @@ withDefaults(defineProps<Props>(), {
 const columns = [
   { key: 'sent_at', label: '送信日時', width: '200px' },
   { key: 'sender', label: '送信者' },
-  { key: 'title', label: '宛先' }
+  { key: 'title', label: '件名' }
 ]
 
 const formatDate = (dateString: string): string => {

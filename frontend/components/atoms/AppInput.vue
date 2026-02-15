@@ -5,13 +5,15 @@ interface Props {
   placeholder?: string
   label?: string
   disabled?: boolean
+  error?: string
 }
 
 withDefaults(defineProps<Props>(), {
   type: 'text',
   placeholder: '',
   label: '',
-  disabled: false
+  disabled: false,
+  error: ''
 })
 
 defineEmits<{
@@ -27,9 +29,10 @@ defineEmits<{
       :value="modelValue"
       :placeholder="placeholder"
       :disabled="disabled"
-      class="app-input__field"
+      :class="['app-input__field', { 'app-input__field--error': error }]"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     >
+    <span v-if="error" class="app-input__error">{{ error }}</span>
   </div>
 </template>
 
@@ -63,5 +66,19 @@ defineEmits<{
 .app-input__field:disabled {
   background-color: #f3f4f6;
   cursor: not-allowed;
+}
+
+.app-input__field--error {
+  border-color: #ef4444;
+}
+
+.app-input__field--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+}
+
+.app-input__error {
+  font-size: 12px;
+  color: #ef4444;
 }
 </style>
