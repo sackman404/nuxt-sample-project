@@ -35,7 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-mock-server
+mock-server/db.json
 .claude
 docs
 TODO.md

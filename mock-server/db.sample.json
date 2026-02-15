@@ -1,0 +1,5 @@
+{
+  "logs": [
+    {"id": 1, "sent_at": "2024-01-01T08:15:00Z", "sender": "yamada.taro@example.com", "title": "test"}
+  ]
+}
